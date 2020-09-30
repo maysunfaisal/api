@@ -216,6 +216,22 @@ func (g Generator) Generate(ctx *genall.GenerationContext) error {
 			schemaFolder := "latest"
 			folderForSchemasWithMarkdown := filepath.Join(schemaFolder, "with-markdown-descriptions")
 			schemaFileName := schemaBaseName + ".json"
+
+			if schemaFileName == "devfile.json" {
+				schemaGoFileName := schemaBaseName + ".go"
+				goJSONSchema := jsonSchema
+
+				goJSONSchema = append([]byte("package "+schemaFolder+"\n\nconst JsonSchema200 = `"), goJSONSchema...)
+				endMarker := "\n`"
+				goJSONSchema = append(goJSONSchema, endMarker...)
+
+				err = writeFile(ctx, schemaFolder, schemaGoFileName, goJSONSchema)
+				if err != nil {
+					root.AddError(err)
+					return nil
+				}
+			}
+
 			err = writeFile(ctx, schemaFolder, schemaFileName, jsonSchema)
 			if err != nil {
 				root.AddError(err)
