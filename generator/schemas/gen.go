@@ -219,11 +219,11 @@ func (g Generator) Generate(ctx *genall.GenerationContext) error {
 
 			if schemaFileName == "devfile.json" {
 				schemaGoFileName := schemaBaseName + ".go"
-				goJSONSchema := jsonSchema
 
-				goJSONSchema = append([]byte("package "+schemaFolder+"\n\nconst JsonSchema200 = `"), goJSONSchema...)
-				endMarker := "\n`"
-				goJSONSchema = append(goJSONSchema, endMarker...)
+				// Replace all "`" with "'"
+				updatedJSONSchema := strings.ReplaceAll(string(jsonSchema[:]), "`", "'")
+				updatedJSONSchema = "package " + schemaFolder + "\n\nconst JsonSchema200 = `" + updatedJSONSchema + "\n`"
+				goJSONSchema := []byte(updatedJSONSchema)
 
 				err = writeFile(ctx, schemaFolder, schemaGoFileName, goJSONSchema)
 				if err != nil {
