@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"strings"
 
-	workspaces "github.com/devfile/api/pkg/apis/workspaces/v1alpha2"
+	workspaces "github.com/maysunfaisal/api/pkg/apis/workspaces/v1alpha2"
 	"k8s.io/apimachinery/pkg/util/json"
 	"k8s.io/apimachinery/pkg/util/sets"
 	"k8s.io/apimachinery/pkg/util/yaml"

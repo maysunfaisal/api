@@ -1,4 +1,4 @@
-module github.com/devfile/api/generator
+module github.com/maysunfaisal/api/generator
 
 go 1.13
 

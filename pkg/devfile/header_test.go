@@ -3,7 +3,7 @@ package devfile
 import (
 	"testing"
 
-	attributes "github.com/devfile/api/pkg/attributes"
+	attributes "github.com/maysunfaisal/api/pkg/attributes"
 	"github.com/stretchr/testify/assert"
 	"sigs.k8s.io/yaml"
 )

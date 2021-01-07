@@ -3,7 +3,7 @@ package crds
 import (
 	"fmt"
 
-	"github.com/devfile/api/generator/genutils"
+	"github.com/maysunfaisal/api/generator/genutils"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	"sigs.k8s.io/controller-tools/pkg/crd"
 	"sigs.k8s.io/controller-tools/pkg/loader"

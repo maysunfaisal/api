@@ -6,7 +6,7 @@ import (
 	"go/printer"
 	"strings"
 
-	"github.com/devfile/api/generator/genutils"
+	"github.com/maysunfaisal/api/generator/genutils"
 	"sigs.k8s.io/controller-tools/pkg/genall"
 	"sigs.k8s.io/controller-tools/pkg/markers"
 

@@ -1,7 +1,7 @@
 package v1alpha2
 
 import (
-	attributes "github.com/devfile/api/pkg/attributes"
+	attributes "github.com/maysunfaisal/api/pkg/attributes"
 )
 
 // +devfile:jsonschema:generate

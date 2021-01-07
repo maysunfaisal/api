@@ -6,7 +6,7 @@ import (
 	"go/types"
 	"strings"
 
-	"github.com/devfile/api/generator/genutils"
+	"github.com/maysunfaisal/api/generator/genutils"
 	crdmarkers "sigs.k8s.io/controller-tools/pkg/crd/markers"
 	"sigs.k8s.io/controller-tools/pkg/genall"
 	"sigs.k8s.io/controller-tools/pkg/loader"

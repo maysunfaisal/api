@@ -1,4 +1,4 @@
-module github.com/devfile/api
+module github.com/maysunfaisal/api
 
 go 1.13
 

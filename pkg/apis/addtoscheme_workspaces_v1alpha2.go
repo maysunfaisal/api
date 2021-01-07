@@ -1,7 +1,7 @@
 package apis
 
 import (
-	"github.com/devfile/api/pkg/apis/workspaces/v1alpha2"
+	"github.com/maysunfaisal/api/pkg/apis/workspaces/v1alpha2"
 )
 
 func init() {

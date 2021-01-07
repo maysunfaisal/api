@@ -3,9 +3,9 @@ package v1alpha1
 import (
 	"testing"
 
-	"github.com/devfile/api/pkg/apis/workspaces/v1alpha2"
 	"github.com/google/go-cmp/cmp"
 	fuzz "github.com/google/gofuzz"
+	"github.com/maysunfaisal/api/pkg/apis/workspaces/v1alpha2"
 	"github.com/stretchr/testify/assert"
 	"k8s.io/apimachinery/pkg/runtime"
 )

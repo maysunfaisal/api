@@ -13,8 +13,8 @@ import (
 
 	"golang.org/x/tools/go/ast/astutil"
 
-	"github.com/devfile/api/generator/genutils"
 	"github.com/go-toolsmith/astcopy"
+	"github.com/maysunfaisal/api/generator/genutils"
 	"sigs.k8s.io/controller-tools/pkg/genall"
 	"sigs.k8s.io/controller-tools/pkg/loader"
 	"sigs.k8s.io/controller-tools/pkg/markers"
@@ -127,7 +127,7 @@ func (g Generator) Generate(ctx *genall.GenerationContext) error {
 		genutils.WriteFormattedSourceFile(fileNamePart, ctx, root, func(buf *bytes.Buffer) {
 			buf.WriteString(`
 import (
-	attributes "github.com/devfile/api/pkg/attributes"
+	attributes "github.com/maysunfaisal/api/pkg/attributes"
 )
 
 `)
