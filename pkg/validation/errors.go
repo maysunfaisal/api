@@ -93,3 +93,4 @@ func (e *InvalidNameOrIdError) Error() string {
 	}
 	return errMsg
 }
+
