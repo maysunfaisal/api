@@ -7,23 +7,23 @@ import (
 func TestIsInt(t *testing.T) {
 
 	tests := []struct {
-		name string
-		arg       string
+		name       string
+		arg        string
 		wantResult bool
 	}{
 		{
-			name: "Case 1: numeric string",
-			arg: "1234",
+			name:       "Case 1: numeric string",
+			arg:        "1234",
 			wantResult: true,
 		},
 		{
-			name: "Case 2: alphanumeric string",
-			arg: "1234abc",
+			name:       "Case 2: alphanumeric string",
+			arg:        "1234abc",
 			wantResult: false,
 		},
 		{
-			name: "Case 3: string with numbers and character",
-			arg: "12_34",
+			name:       "Case 3: string with numbers and character",
+			arg:        "12_34",
 			wantResult: false,
 		},
 	}
@@ -40,23 +40,23 @@ func TestIsInt(t *testing.T) {
 func TestValidateURI(t *testing.T) {
 
 	tests := []struct {
-		name string
-		uri       string
+		name    string
+		uri     string
 		wantErr bool
 	}{
 		{
-			name: "Case 1: valid uri format starts with http",
-			uri: "http://devfile.yaml",
+			name:    "Case 1: valid uri format starts with http",
+			uri:     "http://devfile.yaml",
 			wantErr: false,
 		},
 		{
-			name: "Case 2: invalid uri format starts with http",
-			uri: "http//devfile.yaml",
+			name:    "Case 2: invalid uri format starts with http",
+			uri:     "http//devfile.yaml",
 			wantErr: true,
 		},
 		{
-			name: "Case 3: invalid uri format does not start with http",
-			uri: "./devfile.yaml",
+			name:    "Case 3: invalid uri format does not start with http",
+			uri:     "./devfile.yaml",
 			wantErr: false,
 		},
 	}
