@@ -10,9 +10,9 @@ var buildGroup = v1alpha2.BuildCommandGroupKind
 var runGroup = v1alpha2.RunCommandGroupKind
 
 // generateDummyExecCommand returns a dummy exec command for testing
-func generateDummyExecCommand(name, component string, group v1alpha2.CommandGroup) v1alpha2.Command {
+func generateDummyExecCommand(Id, component string, group v1alpha2.CommandGroup) v1alpha2.Command {
 	return v1alpha2.Command{
-		Id: name,
+		Id: Id,
 		CommandUnion: v1alpha2.CommandUnion{
 			Exec: &v1alpha2.ExecCommand{
 				LabeledCommand: v1alpha2.LabeledCommand{
@@ -29,9 +29,9 @@ func generateDummyExecCommand(name, component string, group v1alpha2.CommandGrou
 }
 
 // generateDummyExecCommand returns a dummy apply command for testing
-func generateDummyApplyCommand(name, component string, group v1alpha2.CommandGroup) v1alpha2.Command {
+func generateDummyApplyCommand(Id, component string, group v1alpha2.CommandGroup) v1alpha2.Command {
 	return v1alpha2.Command{
-		Id: name,
+		Id: Id,
 		CommandUnion: v1alpha2.CommandUnion{
 			Apply: &v1alpha2.ApplyCommand{
 				LabeledCommand: v1alpha2.LabeledCommand{
@@ -46,9 +46,9 @@ func generateDummyApplyCommand(name, component string, group v1alpha2.CommandGro
 }
 
 // generateDummyCompositeCommand returns a dummy composite command for testing
-func generateDummyCompositeCommand(name string, commands []string, group v1alpha2.CommandGroup) v1alpha2.Command {
+func generateDummyCompositeCommand(Id string, commands []string, group v1alpha2.CommandGroup) v1alpha2.Command {
 	return v1alpha2.Command{
-		Id: name,
+		Id: Id,
 		CommandUnion: v1alpha2.CommandUnion{
 			Composite: &v1alpha2.CompositeCommand{
 				LabeledCommand: v1alpha2.LabeledCommand{
@@ -63,9 +63,9 @@ func generateDummyCompositeCommand(name string, commands []string, group v1alpha
 }
 
 // generateDummyCompositeCommand returns a dummy VscodeLaunch command for testing
-func generateDummyVscodeLaunchCommand(name string, commandLocation v1alpha2.VscodeConfigurationCommandLocation, group v1alpha2.CommandGroup) v1alpha2.Command {
+func generateDummyVscodeLaunchCommand(Id string, commandLocation v1alpha2.VscodeConfigurationCommandLocation, group v1alpha2.CommandGroup) v1alpha2.Command {
 	return v1alpha2.Command{
-		Id: name,
+		Id: Id,
 		CommandUnion: v1alpha2.CommandUnion{
 			VscodeLaunch: &v1alpha2.VscodeConfigurationCommand{
 				BaseCommand: v1alpha2.BaseCommand{
@@ -78,9 +78,9 @@ func generateDummyVscodeLaunchCommand(name string, commandLocation v1alpha2.Vsco
 }
 
 // generateDummyCompositeCommand returns a dummy VscodeTask command for testing
-func generateDummyVscodeTaskCommand(name string, commandLocation v1alpha2.VscodeConfigurationCommandLocation, group v1alpha2.CommandGroup) v1alpha2.Command {
+func generateDummyVscodeTaskCommand(Id string, commandLocation v1alpha2.VscodeConfigurationCommandLocation, group v1alpha2.CommandGroup) v1alpha2.Command {
 	return v1alpha2.Command{
-		Id: name,
+		Id: Id,
 		CommandUnion: v1alpha2.CommandUnion{
 			VscodeTask: &v1alpha2.VscodeConfigurationCommand{
 				BaseCommand: v1alpha2.BaseCommand{
@@ -189,6 +189,13 @@ func TestValidateCommands(t *testing.T) {
 			name: "Case 10: Invalid apply command with wrong component",
 			commands: []v1alpha2.Command{
 				generateDummyApplyCommand("command", "invalidComponent", v1alpha2.CommandGroup{}),
+			},
+			wantErr: true,
+		},
+		{
+			name: "Case 11: Invalid command with numeric Id ",
+			commands: []v1alpha2.Command{
+				generateDummyExecCommand("123", component, v1alpha2.CommandGroup{Kind: buildGroup, IsDefault: true}),
 			},
 			wantErr: true,
 		},

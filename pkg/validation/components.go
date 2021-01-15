@@ -19,7 +19,7 @@ const (
 // ValidateComponents validates that the components
 // 1. makes sure the container components reference a valid volume component if it uses volume mounts
 // 2. makes sure the volume components are unique
-// 3. checks the URI specified in openshift components and kubernetest components are with valid format
+// 3. checks the URI specified in openshift components and kubernetes components are with valid format
 // 4. makes sure the component name is not a numeric string
 // 5. makes sure the component name is unique
 func ValidateComponents(components []v1alpha2.Component) error {
@@ -32,13 +32,12 @@ func ValidateComponents(components []v1alpha2.Component) error {
 
 	for _, component := range components {
 		if isInt(component.Name) {
-			return &InvalidNameOrIdError{name:component.Name, resourceType: "component"}
+			return &InvalidNameOrIdError{name: component.Name, resourceType: "component"}
 		}
-		if _,exists:= componentNameMap[component.Name]; exists {
+		if _, exists := componentNameMap[component.Name]; exists {
 			return &InvalidComponentError{name: component.Name}
 		}
 		componentNameMap[component.Name] = true
-
 
 		if component.Container != nil {
 			// Process all the volume mounts in container components to validate them later
@@ -61,10 +60,11 @@ func ValidateComponents(components []v1alpha2.Component) error {
 			// and check if endpoint port are unique across component containers ie;
 			// two component containers cannot have the same target port but two endpoints
 			// in a single component container can have the same target port
-			err := validateEndpoints(component.Container.Endpoints, processedEndPointPort,processedEndPointName )
+			err := validateEndpoints(component.Container.Endpoints, processedEndPointPort, processedEndPointName)
 			if err != nil {
 				return err
 			}
+
 		} else if component.Volume != nil {
 			if _, ok := processedVolumes[component.Name]; !ok {
 				processedVolumes[component.Name] = true
@@ -82,18 +82,25 @@ func ValidateComponents(components []v1alpha2.Component) error {
 			}
 		} else if component.Openshift != nil {
 			if component.Openshift.Uri != "" {
-				return ValidateURI( component.Openshift.Uri )
+				err := ValidateURI(component.Openshift.Uri)
+				if err != nil {
+					return err
+				}
 			}
 
-			err := validateEndpoints(component.Openshift.Endpoints, processedEndPointPort,processedEndPointName )
+			err := validateEndpoints(component.Openshift.Endpoints, processedEndPointPort, processedEndPointName)
 			if err != nil {
 				return err
 			}
-		}else if component.Kubernetes != nil {
+
+		} else if component.Kubernetes != nil {
 			if component.Kubernetes.Uri != "" {
-				return ValidateURI( component.Kubernetes.Uri )
+				err := ValidateURI(component.Kubernetes.Uri)
+				if err != nil {
+					return err
+				}
 			}
-			err := validateEndpoints(component.Kubernetes.Endpoints, processedEndPointPort,processedEndPointName )
+			err := validateEndpoints(component.Kubernetes.Endpoints, processedEndPointPort, processedEndPointName)
 			if err != nil {
 				return err
 			}
