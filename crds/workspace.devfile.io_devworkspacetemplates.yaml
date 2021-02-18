@@ -3912,6 +3912,13 @@ spec:
             description: Structure of the workspace. This is also the specification
               of a workspace template.
             properties:
+              attributes:
+                description: Map of implementation-dependant free-form YAML attributes.
+                  Attribute values can be referenced through out the devfile in string
+                  type fields in the form {{attribute-key}} except for schemaVersion
+                  and metadata
+                type: object
+                x-kubernetes-preserve-unknown-fields: true
               commands:
                 description: Predefined, ready-to-use, workspace-related commands
                 items:
@@ -4576,6 +4583,12 @@ spec:
                       - required:
                         - kubernetes
                       properties:
+                        attributes:
+                          description: Overrides of attributes encapsulated in a parent
+                            devfile or a plugin. Overriding is done according to K8S
+                            strategic merge patch standard rules.
+                          type: object
+                          x-kubernetes-preserve-unknown-fields: true
                         commands:
                           description: Overrides of commands encapsulated in a parent
                             devfile or a plugin. Overriding is done according to K8S
@@ -5288,6 +5301,12 @@ spec:
                 - required:
                   - kubernetes
                 properties:
+                  attributes:
+                    description: Overrides of attributes encapsulated in a parent
+                      devfile or a plugin. Overriding is done according to K8S strategic
+                      merge patch standard rules.
+                    type: object
+                    x-kubernetes-preserve-unknown-fields: true
                   commands:
                     description: Overrides of commands encapsulated in a parent devfile
                       or a plugin. Overriding is done according to K8S strategic merge
@@ -5885,6 +5904,12 @@ spec:
                           - required:
                             - kubernetes
                           properties:
+                            attributes:
+                              description: Overrides of attributes encapsulated in
+                                a parent devfile or a plugin. Overriding is done according
+                                to K8S strategic merge patch standard rules.
+                              type: object
+                              x-kubernetes-preserve-unknown-fields: true
                             commands:
                               description: Overrides of commands encapsulated in a
                                 parent devfile or a plugin. Overriding is done according
