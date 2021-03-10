@@ -12,7 +12,7 @@ type DevWorkspaceTemplateSpec struct {
 
 // +devfile:overrides:generate
 type DevWorkspaceTemplateSpecContent struct {
-	// Map of implementation-dependant free-form YAML attributes.
+	// Map of string attributes.
 	// Attribute values can be referenced throughout the devfile in string type fields in the form {{attribute-key}}
 	// except for schemaVersion, metadata, parent source. Exception to the string field also include element's key identifiers
 	// (command id, component name, endpoint name, project name, etc.) and their references(events, command's component, container's
