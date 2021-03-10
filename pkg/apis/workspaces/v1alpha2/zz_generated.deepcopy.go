@@ -1368,9 +1368,9 @@ func (in *DevWorkspaceTemplateSpecContent) DeepCopyInto(out *DevWorkspaceTemplat
 	*out = *in
 	if in.Attributes != nil {
 		in, out := &in.Attributes, &out.Attributes
-		*out = make(attributes.Attributes, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			(*out)[key] = *val.DeepCopy()
+			(*out)[key] = val
 		}
 	}
 	if in.Components != nil {
@@ -2314,9 +2314,9 @@ func (in *ParentOverrides) DeepCopyInto(out *ParentOverrides) {
 	out.OverridesBase = in.OverridesBase
 	if in.Attributes != nil {
 		in, out := &in.Attributes, &out.Attributes
-		*out = make(attributes.Attributes, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			(*out)[key] = *val.DeepCopy()
+			(*out)[key] = val
 		}
 	}
 	if in.Components != nil {

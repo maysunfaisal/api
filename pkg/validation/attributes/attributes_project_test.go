@@ -4,7 +4,6 @@ import (
 	"testing"
 
 	"github.com/devfile/api/v2/pkg/apis/workspaces/v1alpha2"
-	apiAttributes "github.com/devfile/api/v2/pkg/attributes"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -37,7 +36,7 @@ func TestValidateAndReplaceProjects(t *testing.T) {
 			readFileToStruct(t, tt.testFile, &testProject)
 			testProjectArr := []v1alpha2.Project{testProject}
 
-			testAttribute := apiAttributes.Attributes{}
+			testAttribute := make(map[string]string)
 			readFileToStruct(t, tt.attributeFile, &testAttribute)
 
 			err := ValidateAndReplaceForProjects(testAttribute, testProjectArr)
@@ -84,7 +83,7 @@ func TestValidateAndReplaceStarterProjects(t *testing.T) {
 			readFileToStruct(t, tt.testFile, &testStarterProject)
 			testStarterProjectArr := []v1alpha2.StarterProject{testStarterProject}
 
-			testAttribute := apiAttributes.Attributes{}
+			testAttribute := make(map[string]string)
 			readFileToStruct(t, tt.attributeFile, &testAttribute)
 
 			err := ValidateAndReplaceForStarterProjects(testAttribute, testStarterProjectArr)
@@ -143,7 +142,7 @@ func TestValidateAndReplaceProjectSrc(t *testing.T) {
 			testProjectSrc := v1alpha2.ProjectSource{}
 			readFileToStruct(t, tt.testFile, &testProjectSrc)
 
-			testAttribute := apiAttributes.Attributes{}
+			testAttribute := make(map[string]string)
 			readFileToStruct(t, tt.attributeFile, &testAttribute)
 
 			err := validateandReplaceForProjectSource(testAttribute, &testProjectSrc)

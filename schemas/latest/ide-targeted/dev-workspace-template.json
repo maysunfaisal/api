@@ -202,10 +202,12 @@
       "type": "object",
       "properties": {
         "attributes": {
-          "description": "Map of implementation-dependant free-form YAML attributes. Attribute values can be referenced throughout the devfile in string type fields in the form {{attribute-key}} except for schemaVersion, metadata and events. Exception to the string field include element's key identifiers(command id, component name, endpoint name, project name, etc.) and string enums(command group kind, endpoint exposure, etc.)",
+          "description": "Map of implementation-dependant free-form YAML attributes. Attribute values can be referenced throughout the devfile in string type fields in the form {{attribute-key}} except for schemaVersion, metadata, parent source. Exception to the string field also include element's key identifiers (command id, component name, endpoint name, project name, etc.) and their references(events, command's component, container's volume mount name, etc.) and string enums(command group kind, endpoint exposure, etc.)",
           "type": "object",
-          "additionalProperties": true,
-          "markdownDescription": "Map of implementation-dependant free-form YAML attributes. Attribute values can be referenced throughout the devfile in string type fields in the form {{attribute-key}} except for schemaVersion, metadata and events. Exception to the string field include element's key identifiers(command id, component name, endpoint name, project name, etc.) and string enums(command group kind, endpoint exposure, etc.)"
+          "additionalProperties": {
+            "type": "string"
+          },
+          "markdownDescription": "Map of implementation-dependant free-form YAML attributes. Attribute values can be referenced throughout the devfile in string type fields in the form {{attribute-key}} except for schemaVersion, metadata, parent source. Exception to the string field also include element's key identifiers (command id, component name, endpoint name, project name, etc.) and their references(events, command's component, container's volume mount name, etc.) and string enums(command group kind, endpoint exposure, etc.)"
         },
         "commands": {
           "description": "Predefined, ready-to-use, workspace-related commands",
@@ -1681,7 +1683,9 @@
             "attributes": {
               "description": "Overrides of attributes encapsulated in a parent devfile. Overriding is done according to K8S strategic merge patch standard rules.",
               "type": "object",
-              "additionalProperties": true,
+              "additionalProperties": {
+                "type": "string"
+              },
               "markdownDescription": "Overrides of attributes encapsulated in a parent devfile. Overriding is done according to K8S strategic merge patch standard rules."
             },
             "commands": {

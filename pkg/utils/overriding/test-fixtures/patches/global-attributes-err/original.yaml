@@ -1,8 +1,3 @@
 attributes:
-  boolAttributeToChange: true
+  stringAttributeToChange: original
   stringAttributeToKeep: stringValue
-  
-  objectAttributeToChange:
-    attributeField: 9.9
-    objectAttributeField:
-      objectAttributeSubField: 10

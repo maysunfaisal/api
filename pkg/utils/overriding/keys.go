@@ -5,7 +5,6 @@ import (
 	"reflect"
 
 	workspaces "github.com/devfile/api/v2/pkg/apis/workspaces/v1alpha2"
-	attributesPkg "github.com/devfile/api/v2/pkg/attributes"
 	"github.com/hashicorp/go-multierror"
 	"k8s.io/apimachinery/pkg/util/sets"
 )
@@ -42,14 +41,17 @@ func checkKeys(doCheck checkFn, toplevelListContainers ...workspaces.TopLevelLis
 			attributeValue = value.FieldByName("Attributes")
 		}
 
-		if attributeValue.IsValid() && attributeValue.CanInterface() {
-			attributes, ok := attributeValue.Interface().(attributesPkg.Attributes)
-			if !ok {
-				return fmt.Errorf("unable to fetch Attributes from the devfile data")
-			}
+		if attributeValue.IsValid() && attributeValue.Kind() == reflect.Map {
+			mapIter := attributeValue.MapRange()
+
 			var attributeKeys []string
-			for k := range attributes {
-				attributeKeys = append(attributeKeys, k)
+			for mapIter.Next() {
+				k := mapIter.Key()
+				v := mapIter.Value()
+				if k.Kind() != reflect.String || v.Kind() != reflect.String {
+					return fmt.Errorf("unable to fetch Global Attributes, Global Attributes should be map of strings")
+				}
+				attributeKeys = append(attributeKeys, k.String())
 			}
 			listTypeToKeys["Attributes"] = append(listTypeToKeys["Attributes"], sets.NewString(attributeKeys...))
 		}

@@ -1,10 +1,4 @@
 attributes:
-  boolAttributeToChange: false
+  stringAttributeToChange: patch
 
-  newAttributeValid: false
-  objectAttributeToChange:
-      
-    newObjectAttributeField:
-      objectAttributeSubField: 11
-      newObjectAttributeSubField: newObjectAttributeFieldValue
-    newField: true
+  newAttributeValid: nope

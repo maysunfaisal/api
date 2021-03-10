@@ -54,10 +54,10 @@ commands:
 - id: command2
   composite:
     commands:
-      - "xyz"
+      - xyz
       - command1
 events:
   preStart:
     - command1
   preStop:
-    - "command2"
+    - command2

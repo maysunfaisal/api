@@ -7,7 +7,6 @@ import (
 	"testing"
 
 	workspaces "github.com/devfile/api/v2/pkg/apis/workspaces/v1alpha2"
-	attributesPkg "github.com/devfile/api/v2/pkg/attributes"
 	"github.com/stretchr/testify/assert"
 	"k8s.io/apimachinery/pkg/util/json"
 	yamlMachinery "k8s.io/apimachinery/pkg/util/yaml"
@@ -27,9 +26,9 @@ func TestBasicMerging(t *testing.T) {
 		{
 			name: "Basic Merging",
 			mainContent: &workspaces.DevWorkspaceTemplateSpecContent{
-				Attributes: attributesPkg.Attributes{}.FromMap(map[string]interface{}{
-					"main": true,
-				}, nil),
+				Attributes: map[string]string{
+					"version1": "main",
+				},
 				Commands: []workspaces.Command{
 					{
 						Id: "mainCommand",
@@ -72,9 +71,9 @@ func TestBasicMerging(t *testing.T) {
 			},
 			pluginFlattenedContents: []*workspaces.DevWorkspaceTemplateSpecContent{
 				{
-					Attributes: attributesPkg.Attributes{}.FromMap(map[string]interface{}{
+					Attributes: map[string]string{
 						"version2": "plugin",
-					}, nil),
+					},
 					Commands: []workspaces.Command{
 						{
 							Id: "pluginCommand",
@@ -105,9 +104,9 @@ func TestBasicMerging(t *testing.T) {
 				},
 			},
 			parentFlattenedContent: &workspaces.DevWorkspaceTemplateSpecContent{
-				Attributes: attributesPkg.Attributes{}.FromMap(map[string]interface{}{
-					"version": "parent",
-				}, nil),
+				Attributes: map[string]string{
+					"version3": "parent",
+				},
 				Commands: []workspaces.Command{
 					{
 						Id: "parentCommand",
@@ -138,11 +137,11 @@ func TestBasicMerging(t *testing.T) {
 				},
 			},
 			expected: &workspaces.DevWorkspaceTemplateSpecContent{
-				Attributes: attributesPkg.Attributes{}.FromMap(map[string]interface{}{
-					"version":  "parent",
+				Attributes: map[string]string{
+					"version3": "parent",
 					"version2": "plugin",
-					"main":     true,
-				}, nil),
+					"version1": "main",
+				},
 				Commands: []workspaces.Command{
 					{
 						Id: "parentCommand",

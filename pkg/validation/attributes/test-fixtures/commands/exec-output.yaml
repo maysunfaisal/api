@@ -1,4 +1,4 @@
-component: "BAR"
+component: component
 commandLine: tail -f /dev/null
 workingDir: "FOO"
 label: "1"

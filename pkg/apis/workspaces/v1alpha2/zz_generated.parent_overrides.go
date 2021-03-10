@@ -12,7 +12,7 @@ type ParentOverrides struct {
 	// Overriding is done according to K8S strategic merge patch standard rules.
 	// +optional
 	// +patchStrategy=merge
-	Attributes attributes.Attributes `json:"attributes,omitempty" patchStrategy:"merge"`
+	Attributes map[string]string `json:"attributes,omitempty" patchStrategy:"merge"`
 
 	// Overrides of components encapsulated in a parent devfile or a plugin.
 	// Overriding is done according to K8S strategic merge patch standard rules.

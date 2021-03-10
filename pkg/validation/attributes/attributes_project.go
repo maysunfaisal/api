@@ -2,11 +2,10 @@ package attributes
 
 import (
 	"github.com/devfile/api/v2/pkg/apis/workspaces/v1alpha2"
-	apiAttributes "github.com/devfile/api/v2/pkg/attributes"
 )
 
 // ValidateAndReplaceForProjects validates the projects data for global attribute references and replaces them with the attribute value
-func ValidateAndReplaceForProjects(attributes apiAttributes.Attributes, projects []v1alpha2.Project) error {
+func ValidateAndReplaceForProjects(attributes map[string]string, projects []v1alpha2.Project) error {
 
 	for i := range projects {
 		var err error
@@ -33,7 +32,7 @@ func ValidateAndReplaceForProjects(attributes apiAttributes.Attributes, projects
 }
 
 // ValidateAndReplaceForStarterProjects validates the starter projects data for global attribute references and replaces them with the attribute value
-func ValidateAndReplaceForStarterProjects(attributes apiAttributes.Attributes, starterProjects []v1alpha2.StarterProject) error {
+func ValidateAndReplaceForStarterProjects(attributes map[string]string, starterProjects []v1alpha2.StarterProject) error {
 
 	for i := range starterProjects {
 		var err error
@@ -58,7 +57,7 @@ func ValidateAndReplaceForStarterProjects(attributes apiAttributes.Attributes, s
 }
 
 // validateandReplaceForProjectSource validates a project source location for global attribute references and replaces them with the attribute value
-func validateandReplaceForProjectSource(attributes apiAttributes.Attributes, projectSource *v1alpha2.ProjectSource) error {
+func validateandReplaceForProjectSource(attributes map[string]string, projectSource *v1alpha2.ProjectSource) error {
 
 	var err error
 

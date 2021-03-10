@@ -4,7 +4,6 @@ import (
 	"testing"
 
 	"github.com/devfile/api/v2/pkg/apis/workspaces/v1alpha2"
-	apiAttributes "github.com/devfile/api/v2/pkg/attributes"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -37,7 +36,7 @@ func TestValidateAndReplaceEndpoint(t *testing.T) {
 			readFileToStruct(t, tt.testFile, &testEndpoint)
 			testEndpointArr := []v1alpha2.Endpoint{testEndpoint}
 
-			testAttribute := apiAttributes.Attributes{}
+			testAttribute := make(map[string]string)
 			readFileToStruct(t, tt.attributeFile, &testAttribute)
 
 			err := validateAndReplaceForEndpoint(testAttribute, testEndpointArr)

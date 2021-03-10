@@ -6,7 +6,6 @@ import (
 	"strings"
 
 	workspaces "github.com/devfile/api/v2/pkg/apis/workspaces/v1alpha2"
-	"github.com/devfile/api/v2/pkg/attributes"
 	"k8s.io/apimachinery/pkg/util/json"
 	"k8s.io/apimachinery/pkg/util/sets"
 	"k8s.io/apimachinery/pkg/util/yaml"
@@ -107,18 +106,12 @@ func MergeDevWorkspaceTemplateSpec(
 			postStopCommands = postStopCommands.Union(sets.NewString(content.Events.PostStop...))
 		}
 
-		var err error
 		if len(content.Attributes) > 0 {
 			if len(result.Attributes) == 0 {
-				result.Attributes = attributes.Attributes{}
+				result.Attributes = make(map[string]string)
 			}
 			for k, v := range content.Attributes {
-				result.Attributes.FromMap(map[string]interface{}{
-					k: v,
-				}, &err)
-				if err != nil {
-					return nil, err
-				}
+				result.Attributes[k] = v
 			}
 		}
 	}

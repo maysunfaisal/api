@@ -1,6 +1,5 @@
 attributes:
-  objectAttribute:
-    attributeField: 10.10
+  objectAttribute: parentValue
 components:
   - container:
       image: "aValue"

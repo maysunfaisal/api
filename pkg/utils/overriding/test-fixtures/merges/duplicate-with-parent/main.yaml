@@ -1,8 +1,7 @@
 parent:
   uri: "anyParent"
 attributes:
-  objectAttribute:
-    attributeField: 9.9
+  objectAttribute: mainValue
 components:
   - container:
       image: "aDifferentValue"

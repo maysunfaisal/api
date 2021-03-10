@@ -2,11 +2,10 @@ package attributes
 
 import (
 	"github.com/devfile/api/v2/pkg/apis/workspaces/v1alpha2"
-	apiAttributes "github.com/devfile/api/v2/pkg/attributes"
 )
 
 // ValidateAndReplaceForComponents validates the components data for global attribute references and replaces them with the attribute value
-func ValidateAndReplaceForComponents(attributes apiAttributes.Attributes, components []v1alpha2.Component) error {
+func ValidateAndReplaceForComponents(attributes map[string]string, components []v1alpha2.Component) error {
 
 	for i := range components {
 		var err error
@@ -36,7 +35,7 @@ func ValidateAndReplaceForComponents(attributes apiAttributes.Attributes, compon
 }
 
 // validateAndReplaceForContainerComponent validates the container component data for global attribute references and replaces them with the attribute value
-func validateAndReplaceForContainerComponent(attributes apiAttributes.Attributes, container *v1alpha2.ContainerComponent) error {
+func validateAndReplaceForContainerComponent(attributes map[string]string, container *v1alpha2.ContainerComponent) error {
 	var err error
 
 	if container != nil {
@@ -64,7 +63,7 @@ func validateAndReplaceForContainerComponent(attributes apiAttributes.Attributes
 			return err
 		}
 
-		// Validate memory limit
+		// Validate memory request
 		if container.MemoryRequest, err = validateAndReplaceDataWithAttribute(container.MemoryRequest, attributes); err != nil {
 			return err
 		}
@@ -83,9 +82,6 @@ func validateAndReplaceForContainerComponent(attributes apiAttributes.Attributes
 
 		// Validate container volume mounts
 		for i := range container.VolumeMounts {
-			if container.VolumeMounts[i].Name, err = validateAndReplaceDataWithAttribute(container.VolumeMounts[i].Name, attributes); err != nil {
-				return err
-			}
 			if container.VolumeMounts[i].Path, err = validateAndReplaceDataWithAttribute(container.VolumeMounts[i].Path, attributes); err != nil {
 				return err
 			}
@@ -103,7 +99,7 @@ func validateAndReplaceForContainerComponent(attributes apiAttributes.Attributes
 }
 
 // validateAndReplaceForEnv validates the env data for global attribute references and replaces them with the attribute value
-func validateAndReplaceForEnv(attributes apiAttributes.Attributes, env []v1alpha2.EnvVar) error {
+func validateAndReplaceForEnv(attributes map[string]string, env []v1alpha2.EnvVar) error {
 
 	for i := range env {
 		var err error
@@ -123,7 +119,7 @@ func validateAndReplaceForEnv(attributes apiAttributes.Attributes, env []v1alpha
 }
 
 // validateAndReplaceForKubernetesComponent validates the kubernetes component data for global attribute references and replaces them with the attribute value
-func validateAndReplaceForKubernetesComponent(attributes apiAttributes.Attributes, kubernetes *v1alpha2.KubernetesComponent) error {
+func validateAndReplaceForKubernetesComponent(attributes map[string]string, kubernetes *v1alpha2.KubernetesComponent) error {
 	var err error
 
 	if kubernetes != nil {
@@ -149,7 +145,7 @@ func validateAndReplaceForKubernetesComponent(attributes apiAttributes.Attribute
 }
 
 // validateAndReplaceForOpenShiftComponent validates the openshift component data for global attribute references and replaces them with the attribute value
-func validateAndReplaceForOpenShiftComponent(attributes apiAttributes.Attributes, openshift *v1alpha2.OpenshiftComponent) error {
+func validateAndReplaceForOpenShiftComponent(attributes map[string]string, openshift *v1alpha2.OpenshiftComponent) error {
 	var err error
 
 	if openshift != nil {
@@ -175,7 +171,7 @@ func validateAndReplaceForOpenShiftComponent(attributes apiAttributes.Attributes
 }
 
 // validateAndReplaceForVolumeComponent validates the volume component data for global attribute references and replaces them with the attribute value
-func validateAndReplaceForVolumeComponent(attributes apiAttributes.Attributes, volume *v1alpha2.VolumeComponent) error {
+func validateAndReplaceForVolumeComponent(attributes map[string]string, volume *v1alpha2.VolumeComponent) error {
 	var err error
 
 	if volume != nil {

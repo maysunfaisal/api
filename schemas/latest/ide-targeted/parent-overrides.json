@@ -6,7 +6,9 @@
     "attributes": {
       "description": "Overrides of attributes encapsulated in a parent devfile. Overriding is done according to K8S strategic merge patch standard rules.",
       "type": "object",
-      "additionalProperties": true,
+      "additionalProperties": {
+        "type": "string"
+      },
       "markdownDescription": "Overrides of attributes encapsulated in a parent devfile. Overriding is done according to K8S strategic merge patch standard rules."
     },
     "commands": {

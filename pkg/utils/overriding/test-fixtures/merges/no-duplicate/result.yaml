@@ -1,7 +1,6 @@
 attributes:
-  mainAttribute: true
-  objectAttribute:
-    attributeField: 9.9
+  attributeValue: main
+  attributeParentValue: parent
 components:
   - container:
       image: "aValue"

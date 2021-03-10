@@ -4139,15 +4139,17 @@ spec:
                   of a workspace template.
                 properties:
                   attributes:
+                    additionalProperties:
+                      type: string
                     description: Map of implementation-dependant free-form YAML attributes.
                       Attribute values can be referenced throughout the devfile in
                       string type fields in the form {{attribute-key}} except for
-                      schemaVersion, metadata and events. Exception to the string
-                      field include element's key identifiers(command id, component
-                      name, endpoint name, project name, etc.) and string enums(command
-                      group kind, endpoint exposure, etc.)
+                      schemaVersion, metadata, parent source. Exception to the string
+                      field also include element's key identifiers (command id, component
+                      name, endpoint name, project name, etc.) and their references(events,
+                      command's component, container's volume mount name, etc.) and
+                      string enums(command group kind, endpoint exposure, etc.)
                     type: object
-                    x-kubernetes-preserve-unknown-fields: true
                   commands:
                     description: Predefined, ready-to-use, workspace-related commands
                     items:
@@ -5577,11 +5579,12 @@ spec:
                       - kubernetes
                     properties:
                       attributes:
+                        additionalProperties:
+                          type: string
                         description: Overrides of attributes encapsulated in a parent
                           devfile. Overriding is done according to K8S strategic merge
                           patch standard rules.
                         type: object
-                        x-kubernetes-preserve-unknown-fields: true
                       commands:
                         description: Overrides of commands encapsulated in a parent
                           devfile or a plugin. Overriding is done according to K8S

@@ -4,7 +4,6 @@ import (
 	"testing"
 
 	"github.com/devfile/api/v2/pkg/apis/workspaces/v1alpha2"
-	apiAttributes "github.com/devfile/api/v2/pkg/attributes"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -36,7 +35,7 @@ func TestValidateAndReplaceExecCommand(t *testing.T) {
 			testExecCommand := v1alpha2.ExecCommand{}
 			readFileToStruct(t, tt.testFile, &testExecCommand)
 
-			testAttribute := apiAttributes.Attributes{}
+			testAttribute := make(map[string]string)
 			readFileToStruct(t, tt.attributeFile, &testAttribute)
 
 			err := validateAndReplaceForExecCommand(testAttribute, &testExecCommand)
@@ -81,7 +80,7 @@ func TestValidateAndReplaceCompositeCommand(t *testing.T) {
 			testCompositeCommand := v1alpha2.CompositeCommand{}
 			readFileToStruct(t, tt.testFile, &testCompositeCommand)
 
-			testAttribute := apiAttributes.Attributes{}
+			testAttribute := make(map[string]string)
 			readFileToStruct(t, tt.attributeFile, &testAttribute)
 
 			err := validateAndReplaceForCompositeCommand(testAttribute, &testCompositeCommand)
@@ -126,7 +125,7 @@ func TestValidateAndReplaceApplyCommand(t *testing.T) {
 			testApplyCommand := v1alpha2.ApplyCommand{}
 			readFileToStruct(t, tt.testFile, &testApplyCommand)
 
-			testAttribute := apiAttributes.Attributes{}
+			testAttribute := make(map[string]string)
 			readFileToStruct(t, tt.attributeFile, &testAttribute)
 
 			err := validateAndReplaceForApplyCommand(testAttribute, &testApplyCommand)

@@ -2,11 +2,10 @@ package attributes
 
 import (
 	"github.com/devfile/api/v2/pkg/apis/workspaces/v1alpha2"
-	apiAttributes "github.com/devfile/api/v2/pkg/attributes"
 )
 
 // ValidateAndReplaceForCommands validates the commands data for global attribute references and replaces them with the attribute value
-func ValidateAndReplaceForCommands(attributes apiAttributes.Attributes, commands []v1alpha2.Command) error {
+func ValidateAndReplaceForCommands(attributes map[string]string, commands []v1alpha2.Command) error {
 
 	for i := range commands {
 		var err error
@@ -32,17 +31,12 @@ func ValidateAndReplaceForCommands(attributes apiAttributes.Attributes, commands
 }
 
 // validateAndReplaceForExecCommand validates the exec command data for global attribute references and replaces them with the attribute value
-func validateAndReplaceForExecCommand(attributes apiAttributes.Attributes, exec *v1alpha2.ExecCommand) error {
+func validateAndReplaceForExecCommand(attributes map[string]string, exec *v1alpha2.ExecCommand) error {
 	var err error
 
 	if exec != nil {
 		// Validate exec command line
 		if exec.CommandLine, err = validateAndReplaceDataWithAttribute(exec.CommandLine, attributes); err != nil {
-			return err
-		}
-
-		// Validate exec component
-		if exec.Component, err = validateAndReplaceDataWithAttribute(exec.Component, attributes); err != nil {
 			return err
 		}
 
@@ -68,7 +62,7 @@ func validateAndReplaceForExecCommand(attributes apiAttributes.Attributes, exec 
 }
 
 // validateAndReplaceForCompositeCommand validates the composite command data for global attribute references and replaces them with the attribute value
-func validateAndReplaceForCompositeCommand(attributes apiAttributes.Attributes, composite *v1alpha2.CompositeCommand) error {
+func validateAndReplaceForCompositeCommand(attributes map[string]string, composite *v1alpha2.CompositeCommand) error {
 	var err error
 
 	if composite != nil {
@@ -76,30 +70,18 @@ func validateAndReplaceForCompositeCommand(attributes apiAttributes.Attributes, 
 		if composite.Label, err = validateAndReplaceDataWithAttribute(composite.Label, attributes); err != nil {
 			return err
 		}
-
-		// Validate composite commands
-		for i := range composite.Commands {
-			if composite.Commands[i], err = validateAndReplaceDataWithAttribute(composite.Commands[i], attributes); err != nil {
-				return err
-			}
-		}
 	}
 
 	return nil
 }
 
 // validateAndReplaceForApplyCommand validates the apply command data for global attribute references and replaces them with the attribute value
-func validateAndReplaceForApplyCommand(attributes apiAttributes.Attributes, apply *v1alpha2.ApplyCommand) error {
+func validateAndReplaceForApplyCommand(attributes map[string]string, apply *v1alpha2.ApplyCommand) error {
 	var err error
 
 	if apply != nil {
-		// Validate composite label
+		// Validate apply label
 		if apply.Label, err = validateAndReplaceDataWithAttribute(apply.Label, attributes); err != nil {
-			return err
-		}
-
-		// Validate apply component
-		if apply.Component, err = validateAndReplaceDataWithAttribute(apply.Component, attributes); err != nil {
 			return err
 		}
 	}

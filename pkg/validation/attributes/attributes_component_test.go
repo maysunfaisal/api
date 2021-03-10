@@ -4,7 +4,6 @@ import (
 	"testing"
 
 	"github.com/devfile/api/v2/pkg/apis/workspaces/v1alpha2"
-	apiAttributes "github.com/devfile/api/v2/pkg/attributes"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -36,7 +35,7 @@ func TestValidateAndReplaceContainerComponent(t *testing.T) {
 			testContainerComponent := v1alpha2.ContainerComponent{}
 			readFileToStruct(t, tt.testFile, &testContainerComponent)
 
-			testAttribute := apiAttributes.Attributes{}
+			testAttribute := make(map[string]string)
 			readFileToStruct(t, tt.attributeFile, &testAttribute)
 
 			err := validateAndReplaceForContainerComponent(testAttribute, &testContainerComponent)
@@ -84,7 +83,7 @@ func TestValidateAndReplaceOpenShiftKubernetesComponent(t *testing.T) {
 			readFileToStruct(t, tt.testFile, &testOpenshiftComponent)
 			readFileToStruct(t, tt.testFile, &testKubernetesComponent)
 
-			testAttribute := apiAttributes.Attributes{}
+			testAttribute := make(map[string]string)
 			readFileToStruct(t, tt.attributeFile, &testAttribute)
 
 			err := validateAndReplaceForOpenShiftComponent(testAttribute, &testOpenshiftComponent)
@@ -140,7 +139,7 @@ func TestValidateAndReplaceVolumeComponent(t *testing.T) {
 			testVolumeComponent := v1alpha2.VolumeComponent{}
 			readFileToStruct(t, tt.testFile, &testVolumeComponent)
 
-			testAttribute := apiAttributes.Attributes{}
+			testAttribute := make(map[string]string)
 			readFileToStruct(t, tt.attributeFile, &testAttribute)
 
 			err := validateAndReplaceForVolumeComponent(testAttribute, &testVolumeComponent)
@@ -186,7 +185,7 @@ func TestValidateAndReplaceEnv(t *testing.T) {
 			readFileToStruct(t, tt.testFile, &testEnv)
 			testEnvArr := []v1alpha2.EnvVar{testEnv}
 
-			testAttribute := apiAttributes.Attributes{}
+			testAttribute := make(map[string]string)
 			readFileToStruct(t, tt.attributeFile, &testAttribute)
 
 			err := validateAndReplaceForEnv(testAttribute, testEnvArr)

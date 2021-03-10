@@ -8,7 +8,6 @@ import (
 	"testing"
 
 	workspaces "github.com/devfile/api/v2/pkg/apis/workspaces/v1alpha2"
-	attributesPkg "github.com/devfile/api/v2/pkg/attributes"
 	"github.com/stretchr/testify/assert"
 	"k8s.io/apimachinery/pkg/util/json"
 	yamlMachinery "k8s.io/apimachinery/pkg/util/yaml"
@@ -52,10 +51,10 @@ func TestBasicToplevelOverriding(t *testing.T) {
 				},
 			},
 		},
-		Attributes: attributesPkg.Attributes{}.FromMap(map[string]interface{}{
+		Attributes: map[string]string{
 			"version": "main",
 			"xyz":     "xyz",
-		}, nil),
+		},
 	}
 
 	patch := workspaces.ParentOverrides{
@@ -86,9 +85,9 @@ func TestBasicToplevelOverriding(t *testing.T) {
 				},
 			},
 		},
-		Attributes: attributesPkg.Attributes{}.FromMap(map[string]interface{}{
+		Attributes: map[string]string{
 			"version": "patch",
-		}, nil),
+		},
 	}
 
 	expected := &workspaces.DevWorkspaceTemplateSpecContent{
@@ -133,10 +132,10 @@ func TestBasicToplevelOverriding(t *testing.T) {
 				},
 			},
 		},
-		Attributes: attributesPkg.Attributes{}.FromMap(map[string]interface{}{
+		Attributes: map[string]string{
 			"version": "patch",
 			"xyz":     "xyz",
-		}, nil),
+		},
 	}
 
 	result, err := OverrideDevWorkspaceTemplateSpec(&original, &patch)

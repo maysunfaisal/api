@@ -1,5 +1,5 @@
 # Attributes are defined in test-fixtures/attributes/attributes-referenced.yaml
-component: "{{bar}}"
+component: component
 commandLine: tail -f {{devnull}}
 workingDir: "{{foo}}"
 label: "{{version}}"

@@ -1,7 +1,5 @@
 package v1alpha2
 
-import attributes "github.com/devfile/api/v2/pkg/attributes"
-
 // Structure of the workspace. This is also the specification of a workspace template.
 // +devfile:jsonschema:generate
 type DevWorkspaceTemplateSpec struct {
@@ -16,12 +14,13 @@ type DevWorkspaceTemplateSpec struct {
 type DevWorkspaceTemplateSpecContent struct {
 	// Map of implementation-dependant free-form YAML attributes.
 	// Attribute values can be referenced throughout the devfile in string type fields in the form {{attribute-key}}
-	// except for schemaVersion, metadata and events. Exception to the string field include element's key identifiers(command id,
-	// component name, endpoint name, project name, etc.) and string enums(command group kind, endpoint exposure, etc.)
+	// except for schemaVersion, metadata, parent source. Exception to the string field also include element's key identifiers
+	// (command id, component name, endpoint name, project name, etc.) and their references(events, command's component, container's
+	// volume mount name, etc.) and string enums(command group kind, endpoint exposure, etc.)
 	// +optional
 	// +patchStrategy=merge
 	// +devfile:overrides:include:omitInPlugin=true,description=Overrides of attributes encapsulated in a parent devfile.
-	Attributes attributes.Attributes `json:"attributes,omitempty" patchStrategy:"merge"`
+	Attributes map[string]string `json:"attributes,omitempty" patchStrategy:"merge"`
 
 	// List of the workspace components, such as editor and plugins,
 	// user-provided containers, or other types of components
